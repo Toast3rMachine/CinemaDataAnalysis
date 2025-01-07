@@ -18,3 +18,9 @@ cinemas_columns_means = [
     'entrées 2021',
     'entrées 2022',
 ]
+
+cinemas_columns_entry_per_seats = [
+    'commune',
+    'fauteuils',
+    'entrées 2022'
+]

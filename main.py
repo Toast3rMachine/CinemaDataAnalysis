@@ -1,8 +1,6 @@
-import pandas as pd
-import matplotlib.pyplot as plt
-
 from src.functions.cleaner import *
 from src.functions.descriptive_statistics import *
+from src.functions.seats_entry_2022 import *
 
 from src.values.cinemas_columns import *
 
@@ -16,6 +14,13 @@ cinemas_data = cinemas_filt_columns
 cinemas_means = get_means(cinemas_data, cinemas_columns_means)
 cinemas_std = get_std(cinemas_data, cinemas_columns_means)
 
-print(cinemas_data.head())
-print(cinemas_means)
-print(cinemas_std)
+
+# print(cinemas_data.head())
+# print('\n --- \n')
+# print(cinemas_means)
+# print(cinemas_std)
+# print('\n --- \n')
+# print(cinemas_entry_per_seat)
+# print(get_entry_per_seats_2022(cinemas_data, cinemas_columns_entry_per_seats))
+# print(get_entry_per_seats_2022(cinemas_data, cinemas_columns_entry_per_seats, True))
+# get_seats_diagram(cinemas_data, cinemas_columns_entry_per_seats)
