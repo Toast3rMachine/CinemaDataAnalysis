@@ -24,3 +24,11 @@ cinemas_columns_entry_per_seats = [
     'fauteuils',
     'entrées 2022'
 ]
+
+cinemas_columns_corr = [
+    'commune',
+    'population de la commune',
+    'écrans',
+    'fauteuils',
+    'entrées 2022'
+]
