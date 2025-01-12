@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from sklearn.linear_model import LinearRegression
 
 from sklearn.metrics import r2_score
 from sklearn.metrics import mean_absolute_error
@@ -52,52 +53,32 @@ cinemas_std = get_std(cinemas_data, cinemas_columns_means)
 # get_scatter_graph(cinemas_data_corr, ['fauteuils','entrées 2022'])
 
 #EXO 4
-varExp = ['écrans', 'fauteuils', 'population de la commune']
-varTar2021 = ['entrées 2021']
-varTar2022 = ['entrées 2022']
+#On retire les cinémas qui n'ont pas fait d'entrées en 2021
+# df = pd.DataFrame(cinemas_data[cinemas_data['entrées 2021'] != 0])
 
-varExp = get_right_colunms(cinemas_data, varExp)
-varTar2021 = get_right_colunms(cinemas_data, varTar2021)
-varTar2022 = get_right_colunms(cinemas_data, varTar2022)
-
-# print(varExp)
-# print(varTar2021)
-# print(varTar2021.corr())
-
-# print(cinemas_data[cinemas_data['entrées 2021'] != 0]) 
-df = pd.DataFrame(cinemas_data[cinemas_data['entrées 2021'] != 0])
-# df['croissance'] = (
-#     (df['entrées 2022'] - df['entrées 2021']) / df['entrées 2021']
-# )
-
-# df['entrées 2023 (estimé)'] = (
-#     df['entrées 2022'] * (1+df['croissance'])
-# )
-
-# x = df[['entrées 2022', 'croissance']]
-# print(x)
-# y = df[['entrées 2023 (estimé)']]
+# X = df[['écrans', 'fauteuils', 'population de la commune']]
+# Y = df[['entrées 2021']]
 
 # model = LinearRegression()
-# model.fit(x,y)
+# model.fit(X,Y)
+# Intercept = model.intercept_
+# Coef = model.coef_
+# Score = model.score(X,Y)
 
-# print("Coef : ", model.coef_)
-# print("Intercept : ", model.intercept_)
+# print(Intercept, Coef, Score)
 
-# df["Prédiction 2023"] = model.predict(x)
-# print(df[["commune","Prédiction 2023"]])
+# df[['entrées 2023']] = model.predict(X)
+# print(df[['commune', 'entrées 2023']])
 
-Y = df['entrées 2022']
-X = df[['écrans', 'fauteuils', 'population de la commune']]
+#Split train/test
+# X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.2, random_state=101)
+# print(X_train.shape)
+# print(X_test.shape)
+# print(Y_train.shape)
+# print(Y_test.shape)
 
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.2, random_state=101)
-print(X_train.shape)
-print(X_test.shape)
-print(Y_train.shape)
-print(Y_test.shape)
+# print("Coef de détermination : ", r2_score(X_train.shape, X_test.shape))
 
-print("Coef de détermination : ", r2_score(X_train.shape, X_test.shape))
-# print(r2_score(Y_train.shape, Y_test.shape))
+# print("Erreur moyenne absolue : ", mean_absolute_error(X_train.shape, X_test.shape))
 
-print("Erreur moyenne absolue : ", mean_absolute_error(X_train.shape, X_test.shape))
-# print(mean_absolute_error(Y_train.shape, Y_test.shape))
+#Les prédictions ne correspondent pas aux valeurs réelles
