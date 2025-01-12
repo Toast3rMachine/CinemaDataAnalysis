@@ -1,7 +1,3 @@
-import pandas as pd
-import numpy as np
-from sklearn.linear_model import LinearRegression
-
 from sklearn.metrics import r2_score
 from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
@@ -29,12 +25,19 @@ cinemas_std = get_std(cinemas_data, cinemas_columns_means)
 #EXO 1
 # print(cinemas_data.head())
 # print('\n --- \n')
+# print('Moyenne des colonnes')
 # print(cinemas_means)
+# print('Ecart-type des colonnes')
 # print(cinemas_std)
 # print('\n --- \n')
 
 #EXO 2
+# print('Les trois régions ayant les meilleurs résultats')
+# print('\n --- \n')
 # print(get_entry_per_seats_2022(cinemas_data, cinemas_columns_entry_per_seats))
+# print('\n')
+# print('Les trois régions ayant les pires résultats')
+# print('\n --- \n')
 # print(get_entry_per_seats_2022(cinemas_data, cinemas_columns_entry_per_seats, True))
 # get_seats_diagram(cinemas_data, cinemas_columns_entry_per_seats)
 
@@ -42,19 +45,20 @@ cinemas_std = get_std(cinemas_data, cinemas_columns_means)
 # print(cinemas_data_corr.head())
 # print('\n --- \n')
 # corr_Encran = cinemas_data_corr[['écrans','entrées 2022']].corr(method='pearson', numeric_only=True)
-# coef_Corr_Ecran = corr_Encran['entrées 2022'].values[0]
+# corr_Fauteuil = cinemas_data_corr[['fauteuils','entrées 2022']].corr(method='pearson', numeric_only=True)
 
+# print('\n')
+# print('Corrélation entre les écrans et les entrées de 2022')
 # print(corr_Encran)
 # print('\n')
-# print(coef_Corr_Ecran)
+# print('Corrélation entre les fauteuils et les entrées de 2022')
+# print(corr_Fauteuil)
 
-# print(cinemas_data_corr[['fauteuils','entrées 2022']].corr(method='pearson', numeric_only=True))
-# get_scatter_graph(cinemas_data, ['écrans','entrées 2022'], coef_Corr_Ecran)
-# get_scatter_graph(cinemas_data_corr, ['fauteuils','entrées 2022'])
+# get_scatter_graph(cinemas_data, ['écrans','entrées 2022'])
+# get_scatter_graph(cinemas_data, ['fauteuils','entrées 2022'])
 
 #EXO 4
-#On retire les cinémas qui n'ont pas fait d'entrées en 2021
-# df = pd.DataFrame(cinemas_data[cinemas_data['entrées 2021'] != 0])
+# df = pd.DataFrame(cinemas_data[cinemas_data['entrées 2021'] != 0]) #On retire les cinémas qui n'ont pas fait d'entrées en 2021
 
 # X = df[['écrans', 'fauteuils', 'population de la commune']]
 # Y = df[['entrées 2021']]
@@ -65,13 +69,17 @@ cinemas_std = get_std(cinemas_data, cinemas_columns_means)
 # Coef = model.coef_
 # Score = model.score(X,Y)
 
+# print('Ordonnée à l\'origine, coefficients et coefficent de détermination')
 # print(Intercept, Coef, Score)
 
-# df[['entrées 2023']] = model.predict(X)
-# print(df[['commune', 'entrées 2023']])
+# df[['entrées 2022']] = model.predict(X)
+# print('\n')
+# print('Prédictions des entrées pour 2022')
+# print(df[['commune', 'entrées 2022']])
 
-#Split train/test
-# X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.2, random_state=101)
+# X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.2, random_state=101) #Split train/test
+# print('\n')
+# print('Résultat du train/test (80%/20%)')
 # print(X_train.shape)
 # print(X_test.shape)
 # print(Y_train.shape)
@@ -81,4 +89,9 @@ cinemas_std = get_std(cinemas_data, cinemas_columns_means)
 
 # print("Erreur moyenne absolue : ", mean_absolute_error(X_train.shape, X_test.shape))
 
-#Les prédictions ne correspondent pas aux valeurs réelles
+# print('\n') #Les prédictions pour 2022 ne correspondent pas aux valeurs réelles de 2022, on a même des valeurs négatives dans nos prédictions
+# print('Prédictions des entrées pour 2022 (10 premières lignes)')
+# print(df[['commune', 'entrées 2022']].head(10))
+# print('\n')
+# print('Valeurs réelles des entrées de 2022 (10 premières lignes)')
+# print(cinemas_data[['commune', 'entrées 2022']].head(10))
